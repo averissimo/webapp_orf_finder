@@ -1,0 +1,51 @@
+
+<%= form_tag("/search", method: "post") do %>
+  <%= label_tag(:sequence, "Search for:") %>
+  <%= text_area_tag(:sequence) %><br/>
+
+  <div id="start-codons">
+    <%= label_tag(:start, "Start Codons:") %><br/>
+
+    <div class="codons">
+      <%- @opts[:start].each_with_index do |el, i| %>
+        <div>
+          <%= text_field_tag("start[#{i}]", el.to_s) %>
+          <a href="javascript:void(0)" class="remove_prev">remove</a>
+        </div>
+      <%- end  %>
+    </div>
+    <div id="start_template" class="template">
+      <%= text_field_tag("start", "", disabled: true) %>
+      <a href="javascript:void(0)" class="remove_prev">remove</a>
+    </div>
+    <a href="javascript:void(0)" class="add_prev">add</a>
+  </div>
+
+  <div id="stop-codons">
+    <%= label_tag(:stop, "Stop Codons:") %><br/>
+    <div class="codons">
+      <%- @opts[:stop].each_with_index do |el, i| %>
+        <div>
+          <%= text_field_tag("stop[#{i}]", el.to_s) %>
+          <a href="javascript:void(0)" class="remove_prev">remove</a>
+        </div>
+      <%- end  %>
+    </div>
+    <div id="stop_template" class="template">
+      <%= text_field_tag("stop", "", disabled: true) %>
+      <a href="javascript:void(0)" class="remove_prev">remove</a>
+    </div>
+    <a href="javascript:void(0)" class="add_prev">add</a>
+  </div>
+
+  <%= check_box_tag(:reverse, true, @opts[:reverse]) %>
+  <%= label_tag(:reverse, "Reverse") %><br/>
+
+  <%= check_box_tag(:direct, true,  checked: @opts[:direct]) %>
+  <%= label_tag(:direct, "Direct") %><br/>
+
+  <%= label_tag(:min, "Minimum lenght") %>
+  <%= number_field_tag(:min, @opts[:min]) %><br/>
+
+  <%= submit_tag("Search") %>
+<% end %>
