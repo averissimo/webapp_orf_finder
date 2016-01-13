@@ -5,6 +5,15 @@ class RootController < ApplicationController
   #
   def home
     @opts = ORFFinder::DEFAULT_OPTIONS
+
+    if @opts[:sequence].nil? || @opts[:sequence].length == 0
+      @opts[:sequence] = <<-EOF
+>sample example (this line is optional and does nothing)
+aaaatgaaaaaatgaaaataaataaataa
+aatgaaaaaaaaaaaaaaaaaaaaatga
+EOF
+    end
+
     save_request_info
   end
 
@@ -12,14 +21,19 @@ class RootController < ApplicationController
     @opts = {}
     params.permit!
     @opts[:sequence] = params['sequence']
-    @opts[:start]    = params[:start].to_h.values.reject \
-      { |codon| codon.length != 3 }
-    @opts[:stop]     = params[:stop].to_h.values.reject \
-      { |codon| codon.length != 3 }
+    @opts[:start]    = params[:start].to_h.values
+                       .reject { |codon| codon.length != 3 }
+                       .collect(&:downcase)
+    @opts[:stop]     = params[:stop].to_h.values
+                       .reject { |codon| codon.length != 3 }
+                       .collect(&:downcase)
     @opts[:reverse]  = params['reverse'] == 'true'
     @opts[:direct]   = params['direct'] == 'true'
     @opts[:min]      = Float(params['min'])
-    orf = ORFFinder.new params['sequence'], @opts
+    #
+    @opts[:sequence] = @opts[:sequence]
+    #
+    orf = ORFFinder.new @opts[:sequence].downcase.gsub(/(^>.*)|\n/, ''), @opts
     @results = orf.nt
 
     save_request_info(@opts)

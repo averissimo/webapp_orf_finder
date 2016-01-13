@@ -4,7 +4,7 @@ $(document).on 'page:load ready' , ->
     name : 'atcg'
     validatorFunction : (value, $el, config, language, $form) ->
       # characters other than atcg are valid
-      !RegExp("([^a^t^c^g])").test(value)
+      RegExp(/^([atcgATCG]\n?)*$/).test(value.replace(/^>.+\n?/,''))
     errorMessage : 'Sequence must only have: \'a\', \'t\', \'c\' or \'g\''
     errorMessageKey: 'badSequence'
   }
