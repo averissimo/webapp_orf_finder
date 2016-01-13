@@ -1,4 +1,4 @@
-<%= form_tag(ENV["RAILS_RELATIVE_URL_ROOT"] + '/search#results', method: "post") do %>
+<%= form_tag((ENV["RAILS_RELATIVE_URL_ROOT"].nil? ? "" : ENV["RAILS_RELATIVE_URL_ROOT"]) + '/search#results', method: "post") do %>
   <h3><%= label_tag(:sequence, "Sequence:") %><br/></h3>
   <span class="small gray">nucleotides alphabet: a, t, c, g</span><br/>
   <%= text_area_tag(:sequence, @opts[:sequence], "data-validation": "atcg") %><br/>
@@ -13,8 +13,8 @@
         <%- end  %>
       </div>
       <%= sequence_field_tag("start", "", true) %>
-      <a href="javascript:void(0)" class="add_prev mar-l-1em" alt="Add" title="Add">
-        <%= image_tag('add.svg', height: 20, width: 20) %>
+      <a href="javascript:void(0)" class="fa add_prev mar-l-1em" alt="Add" title="Add">
+        &#xf067;
       </a>
     </div>
 
@@ -26,19 +26,19 @@
         <%- end  %>
       </div>
       <%= sequence_field_tag("stop", "", true) %>
-      <a href="javascript:void(0)" class="add_prev mar-l-1em" alt="Add" title="Add">
-        <%= image_tag('add.svg', height: 20, width: 20) %>
+      <a href="javascript:void(0)" class="fa add_prev mar-l-1em" alt="Add" title="Add">
+        &#xf067;
       </a>
     </div>
   </div>
 
   <h3>Additional options:</h3>
   <div class="mar-l-1em">
-    <%= check_box_tag(:reverse, true, @opts[:reverse]) %>
-    <%= label_tag(:reverse, "Reverse") %><br/>
+    <%= check_box_tag(:direct, true,  @opts[:direct], class: "checkbox-custom") %>
+    <%= label_tag(:direct, "Direct", class: "checkbox-custom-label") %>
 
-    <%= check_box_tag(:direct, true,  @opts[:direct]) %>
-    <%= label_tag(:direct, "Direct") %><br/>
+    <%= check_box_tag(:reverse, true, @opts[:reverse], class: "checkbox-custom") %>
+    <%= label_tag(:reverse, "Reverse", class: "checkbox-custom-label") %><br/>
 
     <%= label_tag(:min, "Minimum lenght") %>
     <%= text_field_tag(:min, Integer(@opts[:min]), "data-validation": "required number") %><br/>

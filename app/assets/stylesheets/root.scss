@@ -37,7 +37,28 @@ $error: #ffcccc ;
 
 body {
   background-image: image-url('background.png');
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.46em;
   margin: 0;
+}
+
+ul {
+  margin-bottom: 0;
+  margin-top: 0;
+  & li {
+    margin-top: .3em;
+  }
+}
+
+p {
+  margin-bottom: 0;
+  margin-top: .3em;
+  text-indent: .3em;
+}
+
+h1 {
+  font-size: 2.3em;
 }
 
 h1,
@@ -86,7 +107,7 @@ h4 {
 .left,
 .right {
   display: inline-table;
-  width: 45%;
+  width: 9em;
 }
 
 textarea {
@@ -119,5 +140,5 @@ input {
 }
 
 .add_prev {
-  margin-left: 98px;
+  margin-left: 5.875em;
 }

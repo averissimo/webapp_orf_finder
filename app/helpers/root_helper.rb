@@ -10,8 +10,8 @@ module RootHelper
                             'data-validation-optional' => 'true')
       concat '&nbsp;'.html_safe
       concat \
-        content_tag(:a, image_tag('remove.svg', height: 20, width: 20),
-                    class: 'remove_prev',
+        content_tag(:a, '&#xf068;'.html_safe,
+                    class: 'fa remove_prev',
                     title: 'Remove',
                     alt: 'Remove',
                     href: 'javascript:void(0)')
