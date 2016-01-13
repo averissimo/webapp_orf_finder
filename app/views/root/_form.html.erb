@@ -1,4 +1,4 @@
-<%= form_tag('/search#results', method: "post") do %>
+<%= form_tag(ENV["RAILS_RELATIVE_URL_ROOT"] + '/search#results', method: "post") do %>
   <h3><%= label_tag(:sequence, "Sequence:") %><br/></h3>
   <span class="small gray">nucleotides alphabet: a, t, c, g</span><br/>
   <%= text_area_tag(:sequence, @opts[:sequence], "data-validation": "atcg") %><br/>

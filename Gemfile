@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', path: "/home/averissimo/.rvm/gems/ruby-2.2.2@rails-5/bundler/gems/rails-f718e52bcce0"
+gem 'rails', '>= 5.0.0.beta1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
