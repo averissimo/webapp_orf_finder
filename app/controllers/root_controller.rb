@@ -47,7 +47,6 @@ class RootController < ApplicationController
       u.reverse      = options[:reverse]
       u.min          = options[:min]
     end
-    byebug
     u.save
   end
 end
