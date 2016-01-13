@@ -20,11 +20,12 @@ $(document).on 'page:load ready' , ->
     new_el.removeAttr('id')
     # enables the input
     new_el.find("input").removeAttr('disabled')
+    new_el.removeClass('template')
     # generates the id
     new_el.find("input").prop('id', input_name + "_" + count )
     # generates the name
     new_el.find("input").prop('name', input_name + "[" + count + "]" )
     # append to the codons table
     $(this).siblings(".codons").append(new_el)
-
+    $.validate()
     event.preventDefault()

@@ -2,7 +2,122 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#start_template,
-#stop_template {
+$gray: #aaa;
+$white: #fff;
+$error: #ffcccc ;
+
+.template {
   display: none;
+}
+
+.codon {
+  margin-right: .4em;
+}
+
+
+.mar-l-1em {
+  margin-left: 1em;
+}
+
+.mar-t-1em {
+  margin-top: 1em;
+}
+
+.mar-b-1em {
+  margin-bottom: 1em;
+}
+
+.mar-b-small {
+  margin-bottom: .2em;
+}
+
+.monospace {
+  font-family: monospace;
+}
+
+body {
+  background-image: image-url('background.png');
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 0;
+}
+
+h3,
+h4 {
+  margin-top: 0.3em;
+}
+
+.gray {
+  color: $gray
+}
+
+.small {
+  font-size: .75em;
+}
+
+.no-bold {
+  font-weight: normal;
+}
+
+.content {
+  background-color: $white;
+  border-bottom: 1px solid $gray;
+  border-left: 1px solid $gray;
+  border-right: 1px solid $gray;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  max-width: 50em;
+  padding-bottom: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+}
+
+.error {
+  background-color: $error;
+}
+
+.left,
+.right {
+  display: inline-table;
+  width: 45%;
+}
+
+textarea {
+  height: 7em;
+  width: 80%;
+}
+
+input {
+  border: 1px solid $gray;
+  height: 2em;
+
+  &[type="checkbox"]{
+     height: inherit;
+  }
+
+  &[type="number"]{
+     width: 80px;
+  }
+  &[type="text"] {
+     width: 60px;
+  }
+  &[type="text"],
+  &[type="number"]{
+    padding-left: 1em;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.add_prev {
+  margin-left: 98px;
 }

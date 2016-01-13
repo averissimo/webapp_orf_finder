@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   root 'root#home'
 
+  get 'search', to: 'root#home'
   post 'search', to: 'root#search'
 end

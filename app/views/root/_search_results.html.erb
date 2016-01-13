@@ -1,0 +1,16 @@
+<h2>Results</h2>
+
+<%- @results.each do |k, v|  %>
+  <div class="mar-l-1em">
+    <h3 class="m-t-1em"><%= k.to_s.capitalize %></h3>
+    <%- v.each do |frame, result|  %>
+      <div class="mar-l-1em">
+      <h4 <%- if result.empty? %>class="gray no-bold"<%- end %>><%= frame.to_s.capitalize %>:<%- if result.empty? %><span class="small"> (no result)</span><%- end  %></h4>
+      <div class="mar-l-1em">
+        <%- count = 0 %>
+        <%- result.to_s.gsub(/(.{3})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- if !codon.nil? && (count+=1) % 30 == 0 %><br/><%- end  %><%- end  %>
+      </div>
+      </div>
+    <%- end  %>
+  </div>
+<%- end  %>

@@ -1,51 +1,32 @@
+<div>
+  <h1>ORF-Finder Webbapp</h1>
+  <p>ORF-Finder is a library that finds the longest Open Reading Frame (ORF) from a nucleotide sequence.</p>
 
-<%= form_tag("/search", method: "post") do %>
-  <%= label_tag(:sequence, "Search for:") %>
-  <%= text_area_tag(:sequence) %><br/>
+  <p>It will search the sequence for existing start and stop codons and return a single ORF for each frame.</p>
 
-  <div id="start-codons">
-    <%= label_tag(:start, "Start Codons:") %><br/>
+  <p>When there is not a ORF present with any of the configurated start and stop codons, then it fallbacks to:</p>
+  <ul>
+    <li>Using the first codon of the sequence when:</li>
+    <ul>
+      <li>No start codon is present;</li>
+      <li>The lenght of an ORF is shorter than the minimum option;</li>
+    </ul>
+    <li>Using the last codon of the sequence when:</li>
+    <ul><li>No stop codon is present.</li></ul>
+  </ul>
+  <p>The source code of the ORF-Finder library is at github under <a target="_blank" href="http://github.com/averissimo/orf_finder">averissimo/orf_finder</a>.</p>
+</div>
 
-    <div class="codons">
-      <%- @opts[:start].each_with_index do |el, i| %>
-        <div>
-          <%= text_field_tag("start[#{i}]", el.to_s) %>
-          <a href="javascript:void(0)" class="remove_prev">remove</a>
-        </div>
-      <%- end  %>
-    </div>
-    <div id="start_template" class="template">
-      <%= text_field_tag("start", "", disabled: true) %>
-      <a href="javascript:void(0)" class="remove_prev">remove</a>
-    </div>
-    <a href="javascript:void(0)" class="add_prev">add</a>
-  </div>
+<div>
+  <%= render 'form' %>
+</div>
 
-  <div id="stop-codons">
-    <%= label_tag(:stop, "Stop Codons:") %><br/>
-    <div class="codons">
-      <%- @opts[:stop].each_with_index do |el, i| %>
-        <div>
-          <%= text_field_tag("stop[#{i}]", el.to_s) %>
-          <a href="javascript:void(0)" class="remove_prev">remove</a>
-        </div>
-      <%- end  %>
-    </div>
-    <div id="stop_template" class="template">
-      <%= text_field_tag("stop", "", disabled: true) %>
-      <a href="javascript:void(0)" class="remove_prev">remove</a>
-    </div>
-    <a href="javascript:void(0)" class="add_prev">add</a>
-  </div>
+<div id="results">
+  <%- if @results %>
+    <%= render 'search_results' %>
+  <%- end  %>
+</div>
 
-  <%= check_box_tag(:reverse, true, @opts[:reverse]) %>
-  <%= label_tag(:reverse, "Reverse") %><br/>
-
-  <%= check_box_tag(:direct, true,  checked: @opts[:direct]) %>
-  <%= label_tag(:direct, "Direct") %><br/>
-
-  <%= label_tag(:min, "Minimum lenght") %>
-  <%= number_field_tag(:min, @opts[:min]) %><br/>
-
-  <%= submit_tag("Search") %>
-<% end %>
+<h2>Ackowledgements</h2>
+<p>This tool was created as a part of <a href="http://fct.pt" target="_blank">FCT</a> grant SFRH/BD/97415/2013 and European Commission research project <a href="http://bachberry.eu" target="_blank">BacHBerry</a> (FP7- 613793)</p>
+<p>Icons Created by <a href="https://thenounproject.com/nazlı" target="_blank">Ezgi Nazlı</a> from <a href="https://thenounproject.com" target="_blank">The Noun Project</a></p>
