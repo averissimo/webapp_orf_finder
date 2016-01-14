@@ -4,10 +4,23 @@
 
 $gray: #aaa;
 $white: #fff;
-$error: #ffcccc ;
+$error: #ffcccc;
+$light-gray: #7d7d7d;
+$cool-blue: #0091ed;
 
 .template {
   display: none;
+}
+
+a,
+a:visited {
+  color: $cool-blue;
+  text-decoration: none;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 .codon {
@@ -94,11 +107,12 @@ h4 {
   border-bottom: 1px solid $gray;
   border-left: 1px solid $gray;
   border-right: 1px solid $gray;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
+  border-top: 3px solid $cool-blue;
+  box-shadow: 0 0 6px $light-gray;
+  margin: 20px auto;
   max-width: 50em;
-  padding-bottom: 2em;
+  min-width: 20em;
+  padding-bottom: 3em;
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 1em;
