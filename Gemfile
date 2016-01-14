@@ -44,3 +44,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # ORF Finder (main functionality)
 gem 'orf_finder'
+
+# JQuery UI
+gem 'jquery-ui-rails'
