@@ -40,6 +40,7 @@ EOF
 
     respond_to do |format|
       format.html { render :home }
+      format.js {}
     end
   end
 

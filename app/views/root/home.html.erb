@@ -11,9 +11,12 @@
   <%= render 'form' %>
 </div>
 
+<h2 class="gray no-bold">Results</h2>
 <div id="results">
   <%- if @results %>
     <%= render 'search_results' %>
+  <%- else %>
+  <p class="gray no-results">Submit form above to see results</p>
   <%- end  %>
 </div>
 
