@@ -4,6 +4,12 @@
 
 $(document).on 'page:load ready' , ->
 
+  $(document).on 'click', '.show-hidden', (event) ->
+    $(this).hide()
+    $(this).siblings('.hidden').toggle "fold", "down", () ->
+      $(this).effect('highlight')
+    event.preventDefault()
+
   $(document).on 'click', 'form .remove_prev', (event) ->
     $(this).parent("div").remove()
     event.preventDefault()

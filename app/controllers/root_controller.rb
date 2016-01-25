@@ -33,8 +33,9 @@ EOF
     #
     @opts[:sequence] = @opts[:sequence]
     #
-    orf = ORFFinder.new @opts[:sequence].downcase.gsub(/(^>.*)|\n/, ''), @opts
-    @results = orf.nt
+    orf = ORFFinder.new @opts[:sequence].downcase.gsub(/(^>.*)|\n|\r/, ''), @opts
+    @results    = orf.nt
+    @results_aa = orf.aa
 
     save_request_info(@opts)
 
