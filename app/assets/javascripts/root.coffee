@@ -4,9 +4,13 @@
 
 $(document).on 'page:load ready' , ->
 
-  $(document).on 'click', '.show-hidden', (event) ->
-    $(this).hide()
-    $(this).siblings('.hidden').toggle "fold", "down", () ->
+  $(document).on 'click', 'a.show-hidden, div.show-hidden a', (event) ->
+    if $(this).parent().is('div.show-hidden')
+      t = $(this).parent()
+    else
+      t = $(this)
+    t.hide()
+    t.siblings('.hidden').toggle "fold", "down", () ->
       $(this).effect('highlight')
     event.preventDefault()
 

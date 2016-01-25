@@ -43,5 +43,38 @@
     <%= label_tag(:min, "Minimum lenght") %>
     <%= text_field_tag(:min, Integer(@opts[:min]), "data-validation": "required number") %><br/>
   </div>
+
+  <h3>Codon Table</h3>
+  <div class="mar-l-1em">to use in translation from Nuclei-Acid to Amino-Acid</div>
+  <div class="mar-l-1em">
+    <%- (0..3).each do |t_i|  %>
+      <%- table_num = Bio::CodonTable::DEFINITIONS.keys[t_i] %>
+      <%- table_name = Bio::CodonTable::DEFINITIONS[table_num] %>
+      <div>
+        <%= radio_button_tag(:codon_table, "#{table_num}", (table_num == @opts[:codon_table]), class: "radio-custom") %>
+        <%= label_tag("codon_table_#{table_num}".to_sym, table_name, class: "radio-custom-label") %>
+      </div>
+    <%- end %>
+    <div class="hidden">
+      <%- (4..(Bio::CodonTable::TABLES.size - 1)).each do |t_i|  %>
+        <%- table_num = Bio::CodonTable::DEFINITIONS.keys[t_i] %>
+        <%- table_name = Bio::CodonTable::DEFINITIONS[table_num] %>
+        <%- if table_num == @opts[:codon_table] %>
+        </div>
+        <%- end %>
+        <div>
+          <%= radio_button_tag(:codon_table, "#{table_num}", (table_num == @opts[:codon_table]), class: "radio-custom") %>
+          <%= label_tag("codon_table_#{table_num}".to_sym, table_name, class: "radio-custom-label") %>
+        </div>
+        <%- if table_num == @opts[:codon_table] %>
+        <div class="hidden">
+        <%- end %>
+      <%- end %>
+    </div>
+    <div class="show-hidden">
+      ... <a href="javascript:void(0)">Show more tables</a><br/>
+      <br/>
+    </div>
+  </div>
   <%= submit_tag("Search") %>
 <% end %>

@@ -14,6 +14,10 @@ aatgaaaaaaaaaaaaaaaaaaaaatga
 EOF
     end
 
+    if @opts[:codon_table].nil?
+      @opts[:codon_table] = 1
+    end
+
     save_request_info
   end
 
@@ -33,7 +37,11 @@ EOF
     #
     @opts[:sequence] = @opts[:sequence]
     #
-    orf = ORFFinder.new @opts[:sequence].downcase.gsub(/(^>.*)|\n|\r/, ''), @opts
+    @opts[:codon_table] = Integer(params['codon_table'])
+    #
+    orf = ORFFinder.new @opts[:sequence].downcase.gsub(/(^>.*)|\n|\r/, ''),
+                        @opts[:codon_table],
+                        @opts
     @results    = orf.nt
     @results_aa = orf.aa
 
