@@ -3,8 +3,8 @@
   <span class="small gray">nucleotides alphabet: a, t, c, g</span><br/>
   <%= text_area_tag(:sequence, @opts[:sequence], "data-validation": "atcg") %><br/>
 
-  <div>
-    <div id="start-codons" class="codons-wrapper mar-t-1em left">
+  <div id="codons-wrapper">
+    <div id="start-codons" class="mar-t-1em left">
       <%= label_tag(:start, "Start Codons:") %><br/>
       <div class="codons">
         <%- @opts[:start].each_with_index do |el, i| %>

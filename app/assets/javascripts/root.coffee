@@ -13,11 +13,10 @@ $(document).on 'page:load ready' , ->
       new_stop_inputs.find('.remove_prev').hide()
       $('#start-codons .codons')
         .html(new_start_inputs.html())
-        .effect('highlight')
       $('#stop-codons .codons')
         .html(new_stop_inputs.html())
-        .effect('highlight')
       $('.codons').siblings('.add_prev').css('visibility','hidden')
+      $('#codons-wrapper').effect('highlight')
     else
       $('.codons .codon input').removeAttr('disabled')
       $('.codons .codon input').siblings('.remove_prev').show()
