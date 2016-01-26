@@ -1,0 +1,26 @@
+<%- seq.each do |t_i|  %>
+  <%- table_num = Bio::CodonTable::DEFINITIONS.keys[t_i] %>
+  <%- table_name = Bio::CodonTable::DEFINITIONS[table_num] %>
+  <%- if hide && table_num == @opts[:codon_table] %>
+    </div>
+    <div>
+  <%- end %>
+  <div title="START codons: <%= Bio::CodonTable[table_num].start.join(', ') %> | STOP codons: <%= Bio::CodonTable[table_num].stop.join(', ') %>">
+    <%= radio_button_tag(:codon_table, "#{table_num}", (table_num == @opts[:codon_table]), class: "codon-table-entry radio-custom") %>
+    <%= label_tag("codon_table_#{table_num}".to_sym, table_name, class: "radio-custom-label") %>
+    <div class="codon_table_<%= table_num %> hidden">
+      <h4>Start codons</h4>
+      <div class="start">
+        <%= render 'codons_from_codon_table', table_num: table_num, table_name: table_name, name: 'start' %>
+      </div>
+      <h4>Stop codons</h4>
+      <div class="stop">
+        <%= render 'codons_from_codon_table', table_num: table_num, table_name: table_name, name: 'stop' %>
+      </div>
+    </div>
+  </div>
+  <%- if hide && table_num == @opts[:codon_table] %>
+    </div>
+    <div class="hidden">
+  <%- end %>
+<%- end %>

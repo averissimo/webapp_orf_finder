@@ -6,16 +6,21 @@ $(document).on 'page:load ready' , ->
 
   fun = () ->
     if $('#same_as_codon_table').prop('checked')
-      # put all as disabled
-      $('.codons .codon input').prop('disabled', true)
-      $('.codon_table_entries, .remove_prev, #codons-custom').hide()
-      $('.add_prev').css('visibility','hidden')
       table_num = $('.codon-table-entry:checked').prop('defaultValue')
-      $('.codon_table_' + table_num).show().effect('highlight')
+      new_start_inputs = $('.codon_table_' + table_num + ' .start').clone()
+      new_stop_inputs  = $('.codon_table_' + table_num + ' .stop').clone()
+      new_start_inputs.find('.remove_prev').hide()
+      new_stop_inputs.find('.remove_prev').hide()
+      $('#start-codons .codons')
+        .html(new_start_inputs.html())
+        .effect('highlight')
+      $('#stop-codons .codons')
+        .html(new_stop_inputs.html())
+        .effect('highlight')
+      $('.codons').siblings('.add_prev').css('visibility','hidden')
     else
-      $('.codons .codon input:visible').removeAttr('disabled')
-      $('.codons .codon input:visible')
-        .siblings('.remove_prev').show()
+      $('.codons .codon input').removeAttr('disabled')
+      $('.codons .codon input').siblings('.remove_prev').show()
       $('.codons').siblings('.add_prev').css('visibility','visible')
 
   fun()

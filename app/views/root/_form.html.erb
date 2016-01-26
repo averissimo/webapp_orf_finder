@@ -3,17 +3,13 @@
   <span class="small gray">nucleotides alphabet: a, t, c, g</span><br/>
   <%= text_area_tag(:sequence, @opts[:sequence], "data-validation": "atcg") %><br/>
 
-  <div class="codons-wrapper">
-    <div id="start-codons" class="mar-t-1em left">
+  <div>
+    <div id="start-codons" class="codons-wrapper mar-t-1em left">
       <%= label_tag(:start, "Start Codons:") %><br/>
       <div class="codons">
-        <div id="codons-custom">
-          <%- @opts[:start].each_with_index do |el, i| %>
-            <%= sequence_field_tag("stop[#{i}]", el.to_s, false, (@opts[:same_as_codon_table] ? ['hidden'] : nil ), '', @opts[:same_as_codon_table]) %>
-          <%- end  %>
-        </div>
-        <!-- Show all codons from Codon Tables  -->
-        <%= render( 'codons_from_codon_table', name: "start") %>
+        <%- @opts[:start].each_with_index do |el, i| %>
+          <%= sequence_field_tag("stop[#{i}]", el.to_s, false, (@opts[:same_as_codon_table] ? ['hidden'] : nil ), '', @opts[:same_as_codon_table]) %>
+        <%- end  %>
       </div>
       <%= sequence_field_tag("start", "", true) %>
       <a href="javascript:void(0)" class="fa add_prev mar-l-1em" alt="Add" title="Add">
@@ -29,8 +25,6 @@
             <%= sequence_field_tag("stop[#{i}]", el.to_s, false, (@opts[:same_as_codon_table] ? ['hidden'] : nil ), '', @opts[:same_as_codon_table]) %>
           <%- end  %>
         </div>
-        <!-- Show all codons from Codon Tables  -->
-        <%= render( 'codons_from_codon_table', name: "stop") %>
       </div>
       <%= sequence_field_tag("stop", "", true) %>
       <a href="javascript:void(0)" class="fa add_prev mar-l-1em" alt="Add" title="Add">
@@ -39,7 +33,7 @@
     </div>
     <div class="mar-l-1em">
       <%= check_box_tag(:same_as_codon_table, true, @opts[:same_as_codon_table], class: "checkbox-custom") %>
-      <%= label_tag(:same_as_codon_table, "Use same start/stop as codon table", class: "checkbox-custom-label") %>
+      <%= label_tag(:same_as_codon_table, "Use same start/stop as defined in codon table below", class: "checkbox-custom-label") %>
     </div>
   </div>
 
@@ -58,29 +52,11 @@
   <h3>Codon Table</h3>
   <div class="mar-l-1em">to use in translation from Nuclei-Acid to Amino-Acid</div>
   <div class="mar-l-1em">
-    <%- (0..3).each do |t_i|  %>
-      <%- table_num = Bio::CodonTable::DEFINITIONS.keys[t_i] %>
-      <%- table_name = Bio::CodonTable::DEFINITIONS[table_num] %>
-      <div>
-        <%= radio_button_tag(:codon_table, "#{table_num}", (table_num == @opts[:codon_table]), class: "codon-table-entry radio-custom") %>
-        <%= label_tag("codon_table_#{table_num}".to_sym, table_name, class: "radio-custom-label") %>
-      </div>
-    <%- end %>
+    <div>
+      <%= render('codon_table_option', seq: (0..3), hide: false) %>
+    </div>
     <div class="hidden">
-      <%- (4..(Bio::CodonTable::TABLES.size - 1)).each do |t_i|  %>
-        <%- table_num = Bio::CodonTable::DEFINITIONS.keys[t_i] %>
-        <%- table_name = Bio::CodonTable::DEFINITIONS[table_num] %>
-        <%- if table_num == @opts[:codon_table] %>
-        </div>
-        <%- end %>
-        <div>
-          <%= radio_button_tag(:codon_table, "#{table_num}", (table_num == @opts[:codon_table]), class: "codon-table-entry radio-custom") %>
-          <%= label_tag("codon_table_#{table_num}".to_sym, table_name, class: "radio-custom-label") %>
-        </div>
-        <%- if table_num == @opts[:codon_table] %>
-        <div class="hidden">
-        <%- end %>
-      <%- end %>
+      <%= render('codon_table_option', seq: (4..(Bio::CodonTable::TABLES.size - 1)), hide: true) %>
     </div>
     <div class="show-hidden">
       ... <a href="javascript:void(0)">Show more tables</a><br/>
