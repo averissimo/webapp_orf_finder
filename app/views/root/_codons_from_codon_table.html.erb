@@ -1,0 +1,10 @@
+<!-- Show all codons from Codon Tables  -->
+<%- Bio::CodonTable::DEFINITIONS.each do |k, v| %>
+  <%- show_codons = (@opts[:same_as_codon_table] && @opts[:codon_table] == k) %>
+  <div class="codon_table_entries codon_table_<%= k %> <%= show_codons ? '' : 'hidden' %>">
+  <%- codon_table = (name == "start" ? Bio::CodonTable[k].start : Bio::CodonTable[k].stop)  %>
+  <%- codon_table.each do |codon|  %>
+    <%= sequence_field_tag("#{name}[#{DateTime.now.strftime('%Q')}#{DateTime.now.strftime('%12N')}]", codon.to_s, false, [k], v, @opts[:same_as_codon_table]) %>
+  <%- end  %><!-- END Bio::CodonTable[k].each -->
+  </div>
+<%- end  %> <!-- END Bio::CodonTable::DEFINITIONS.each -->

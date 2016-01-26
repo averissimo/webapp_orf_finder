@@ -4,6 +4,28 @@
 
 $(document).on 'page:load ready' , ->
 
+  fun = () ->
+    if $('#same_as_codon_table').prop('checked')
+      # put all as disabled
+      $('.codons .codon input').prop('disabled', true)
+      $('.codon_table_entries, .remove_prev, #codons-custom').hide()
+      $('.add_prev').css('visibility','hidden')
+      table_num = $('.codon-table-entry:checked').prop('defaultValue')
+      $('.codon_table_' + table_num).show().effect('highlight')
+    else
+      $('.codons .codon input:visible').removeAttr('disabled')
+      $('.codons .codon input:visible')
+        .siblings('.remove_prev').show()
+      $('.codons').siblings('.add_prev').css('visibility','visible')
+
+  fun()
+
+  $(document).on 'change', '#same_as_codon_table', (event) ->
+    fun()
+
+  $(document).on 'change, click', '.codon-table-entry', (event) ->
+    fun()
+
   $(document).on 'click', 'a.show-hidden, div.show-hidden a', (event) ->
     if $(this).parent().is('div.show-hidden')
       t = $(this).parent()
@@ -25,7 +47,7 @@ $(document).on 'page:load ready' , ->
     # gets the input name (start/stop)
     input_name = new_el.find("input").prop('id')
     # counts the number of codons
-    count = $(this).siblings(".codons").children().length
+    count = $(".codon input").length
     # removes id from div
     new_el.removeAttr('id')
     # enables the input
