@@ -76,12 +76,14 @@ EOF
     )
 
     unless options.nil?
-      u.sequence     = options[:sequence]
-      u.start_codons = options[:start].join ', '
-      u.stop_codons  = options[:stop]. join ', '
-      u.direct       = options[:direct]
-      u.reverse      = options[:reverse]
-      u.min          = options[:min]
+      u.sequence            = options[:sequence]
+      u.start_codons        = options[:start].join ', '
+      u.stop_codons         = options[:stop]. join ', '
+      u.direct              = options[:direct]
+      u.reverse             = options[:reverse]
+      u.min                 = options[:min]
+      u.codon_table         = options[:codon_table]
+      u.same_as_codon_table = options[:same_as_codon_table]
     end
     u.save
   end

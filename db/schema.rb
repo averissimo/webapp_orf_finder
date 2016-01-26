@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113162005) do
+ActiveRecord::Schema.define(version: 20160126164206) do
 
   create_table "usages", force: :cascade do |t|
     t.string   "ip"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 20160113162005) do
     t.boolean  "direct"
     t.boolean  "reverse"
     t.integer  "min"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "codon_table"
+    t.boolean  "same_as_codon_table"
   end
 
 end
