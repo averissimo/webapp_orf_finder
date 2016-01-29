@@ -8,7 +8,7 @@
       <%= label_tag(:start, "Start Codons:") %><br/>
       <div class="codons">
         <%- @opts[:start].each_with_index do |el, i| %>
-          <%= sequence_field_tag("stop[#{i}]", el.to_s, false, (@opts[:same_as_codon_table] ? ['hidden'] : nil ), '', @opts[:same_as_codon_table]) %>
+          <%= sequence_field_tag("start[#{i}]", el.to_s, false, (@opts[:same_as_codon_table] ? ['hidden'] : nil ), '', @opts[:same_as_codon_table]) %>
         <%- end  %>
       </div>
       <%= sequence_field_tag("start", "", true) %>
