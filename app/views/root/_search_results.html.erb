@@ -7,6 +7,7 @@
         <a class="show-hidden" href="javascript:void(0)">Click here to show sequence</a>
         <div class="hidden">
           <%- @results[k][:sequence].to_s.gsub(/(.{3})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %>
+        </div>
       </div>
     </div>
     <%- v.each do |frame, result|  %>
