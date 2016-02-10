@@ -2,12 +2,11 @@
   <div class="mar-l-1em">
     <h3 class="m-t-1em"><%= k.to_s.capitalize %></h3>
     <div class="mar-l-1em">
-      <h4>Sequence</h4>
+      <h4>Sequence <span class="gray">(<%= @results[k][:sequence].size %>)</span></h4>
       <div class="mar-l-1em">
         <a class="show-hidden" href="javascript:void(0)">Click here to show sequence</a>
         <div class="hidden">
           <%- @results[k][:sequence].to_s.gsub(/(.{3})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %>
-        </div>
       </div>
     </div>
     <%- v.each do |frame, result|  %>
@@ -17,11 +16,11 @@
         <%- unless result.empty? %>
         <div class="mar-l-1em">
           <!-- Nucleotide sequence -->
-          <h5 <%- if result.empty? %>class="gray no-bold"<%- end %>>nt<%- if result.empty? %><span class="small"> (no result)</span><%- end  %></h5>
-          <div class="mar-l-1em"><%- result.to_s.gsub(/(.{3})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %></div>
+          <h5 <%- if result.empty? %>class="gray no-bold"<%- end %>>nucleic-acids<%- if result.empty? %><span class="small"> (no result)</span><%- else %><span class="gray"> (<%= result.size %>)</span><%- end  %></h5>
+          <div class="sequence mar-l-1em" data-length="<%= result.size %>"><%- result.to_s.gsub(/(.{3})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %></div>
           <!-- Amino-acide sequence -->
-          <h5 <%- if result.empty? %>class="gray no-bold"<%- end %>>aa<%- if result.empty? %><span class="small"> (no   result)</span><%- end  %></h5>
-          <div class="mar-l-1em"><%- @results_aa[k][frame].to_s.gsub(/(.{1})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %></div>
+          <h5 <%- if result.empty? %>class="gray no-bold"<%- end %>>amino-acids<%- if result.empty? %><span class="small"> (no   result)</span><%- else %><span class="gray"> (<%= @results_aa[k][frame].size %>)</span><%- end  %></h5>
+          <div class="sequence mar-l-1em" data-length="<%= @results_aa[k][frame].size %>"><%- @results_aa[k][frame].to_s.gsub(/(.{1})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %></div>
         </div>
         <%- end  %> <!-- END unless results.empty? -->
       </div>

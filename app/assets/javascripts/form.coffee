@@ -10,6 +10,20 @@ $(document).on 'page:load ready' , ()->
     div.queue ()->
       div.toggle "fold", "down", ()->
         div.html(new_data)
+        minimized_elements = $('div.sequence')
+        minimize_character_count = 50
+
+        minimized_elements.each () ->
+          len = $(this).find('.codon').length
+          if(len < minimize_character_count )
+            return
+          # index starts at 0, thefore it needs to be adjusted
+          $($(this).find('.codon')[minimize_character_count - 1])
+            .after('<span>... </span>' +
+                   '<a href="#" class="more">more</a>')
+          #
+          $(this).find('.codon').slice(minimize_character_count)
+            .wrapAll('<span style="display:none;"></span>')
       div.delay(100).toggle "fold", "down"
       div.dequeue()
 

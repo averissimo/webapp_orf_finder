@@ -4,6 +4,11 @@
 
 $(document).on 'page:load ready' , ->
 
+  $(document).on 'submit', 'form', (event) ->
+    $('html, body').animate {
+      scrollTop: $('#results').offset().top
+    }, 500
+
   fun = () ->
     if $('#same_as_codon_table').prop('checked')
       table_num = $('.codon-table-entry:checked').prop('defaultValue')
@@ -65,3 +70,16 @@ $(document).on 'page:load ready' , ->
     $(this).siblings(".codons").append(new_el)
     $.validate()
     event.preventDefault()
+
+
+
+  # minimze long sequences
+
+  $(document).on 'click', 'a.more', (event) ->
+    event.preventDefault()
+    $(this).hide().prev().hide()
+    $(this).next().show()
+
+  $(document).on 'click', 'a.less', (event) ->
+    event.preventDefault()
+    $(this).parent().hide().prev().show().prev().show()
