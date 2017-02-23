@@ -13,17 +13,26 @@
     <%- v.each do |frame, result|  %>
       <%- next if frame == :sequence %>
       <div class="mar-l-1em">
-      <h4 <%- if result.empty? %>class="gray no-bold"<%- end %>><%= frame.to_s.capitalize %><%- if result.empty? %><span class="small"> (no result)</span><%- end  %></h4>
+      <h4 <%- if result.first.empty? %>class="gray no-bold"<%- end %>><%= frame.to_s.capitalize %><%- if result.first.empty? %><span class="small"> (no result)</span><%- end  %></h4>
+      <%- result.each_with_index do |sub_result, ix|  %>
         <%- unless result.empty? %>
         <div class="mar-l-1em">
+          <%- if result.size > 1 -%>
+          <%= "#{ix + 1} / #{result.size} with same longest size (in the same frame)" %>
+          <div class="mar-l-1em">
+          <%- end  %> <!-- END unless results.empty? -->   
           <!-- Nucleotide sequence -->
-          <h5 <%- if result.empty? %>class="gray no-bold"<%- end %>>nucleic-acids<%- if result.empty? %><span class="small"> (no result)</span><%- else %><span class="gray"> (<%= result.size %>)</span><%- end  %></h5>
-          <div class="sequence mar-l-1em" data-length="<%= result.size %>"><%- result.to_s.gsub(/(.{3})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %></div>
+          <h5 <%- if sub_result.empty? %>class="gray no-bold"<%- end %>>nucleic-acids<%- if sub_result.empty? %><span class="small"> (no result)</span><%- else %><span class="gray"> (<%= sub_result.size %>)</span><%- end  %></h5>
+          <div class="sequence mar-l-1em" data-length="<%= sub_result.size %>"><%- sub_result.to_s.gsub(/(.{3})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %></div>
           <!-- Amino-acide sequence -->
-          <h5 <%- if result.empty? %>class="gray no-bold"<%- end %>>amino-acids<%- if result.empty? %><span class="small"> (no   result)</span><%- else %><span class="gray"> (<%= @results_aa[k][frame].size %>)</span><%- end  %></h5>
-          <div class="sequence mar-l-1em" data-length="<%= @results_aa[k][frame].size %>"><%- @results_aa[k][frame].to_s.gsub(/(.{1})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %></div>
+          <h5 <%- if sub_result.empty? %>class="gray no-bold"<%- end %>>amino-acids<%- if sub_result.empty? %><span class="small"> (no result)</span><%- else %><span class="gray"> (<%= @results_aa[k][frame][ix].size %>)</span><%- end  %></h5>
+          <div class="sequence mar-l-1em" data-length="<%= @results_aa[k][frame][ix].size %>"><%- @results_aa[k][frame][ix].to_s.gsub(/(.{1})/) do |codon| %><span class="codon monospace"><%= codon %></span><%- end  %></div>
+          <%- if result.size > 1 -%>
+          </div>
+          <%- end  %> <!-- END unless results.empty? -->   
         </div>
-        <%- end  %> <!-- END unless results.empty? -->
+          <%- end  %> <!-- END unless results.empty? -->
+        <%- end  %> <!-- END result.each -->
       </div>
     <%- end  %> <!-- END v.each -->
   </div>
