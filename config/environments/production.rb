@@ -80,5 +80,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.relative_url_root = '/orf_finder'
+  config.relative_url_root = if ENV['RELATIVE_URL'].nil?
+                               '/'
+                             else
+                               ENV['RELATIVE_URL']
+                             end
 end
