@@ -174,13 +174,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug (= 10.0.2)
+  byebug
   coffee-rails!
-  i18n (= 1.5.1)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
-  nokogiri (= 1.9.1)
   orf_finder
   puma
   rails (>= 5.0.1)
