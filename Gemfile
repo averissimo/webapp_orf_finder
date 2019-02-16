@@ -31,7 +31,7 @@ gem 'puma'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'byebug' # , '10.0.2'
 end
 
 group :development do
@@ -40,10 +40,13 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data'
 
 # ORF Finder (main functionality)
 gem 'orf_finder'
 
 # JQuery UI
 gem 'jquery-ui-rails'
+
+# gem 'i18n', '1.5.1'
+# gem 'nokogiri', '1.9.1'
